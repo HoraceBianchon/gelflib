@@ -56,6 +56,13 @@ if(WIN32)
     set_target_properties(${PROJECT_NAME_STR} PROPERTIES COMPILE_FLAGS "/wd4251")
 endif (WIN32)
 
+target_include_directories(
+    ${PROJECT_NAME_STR}
+    INTERFACE
+    $<BUILD_INTERFACE:${COMMON_INCLUDES}>
+    $<INSTALL_INTERFACE:include>
+)
+
 
 #-------------------
 # Install
