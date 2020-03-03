@@ -62,7 +62,12 @@ target_include_directories(
     $<BUILD_INTERFACE:${COMMON_INCLUDES}>
     $<INSTALL_INTERFACE:include>
 )
-
+target_include_directories(
+    ${PROJECT_NAME_STR}
+    INTERFACE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
+    $<INSTALL_INTERFACE:include>
+)
 
 #-------------------
 # Install
