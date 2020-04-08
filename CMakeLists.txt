@@ -38,8 +38,6 @@ file(GLOB GELFLIB_SRCS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 add_library(${PROJECT_NAME_STR} SHARED ${GELFLIB_SRCS} ${GELFLIB_PUBLIC_HDRS} ${GELFLIB_PRIVATE_HDRS})
 
-message("GELFLIB_PRIVATE_HDRS == ${GELFLIB_PRIVATE_HDRS}")
-
 add_library(${PROJECT_NAME_STR}static STATIC ${GELFLIB_SRCS} ${GELFLIB_PUBLIC_HDRS} ${GELFLIB_PRIVATE_HDRS})
 target_compile_definitions(${PROJECT_NAME_STR}static PUBLIC GELF_STATIC )
 
@@ -64,6 +62,19 @@ target_include_directories(
 )
 target_include_directories(
     ${PROJECT_NAME_STR}
+    INTERFACE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
+    $<INSTALL_INTERFACE:include>
+)
+
+target_include_directories(
+    ${PROJECT_NAME_STR}static
+    INTERFACE
+    $<BUILD_INTERFACE:${COMMON_INCLUDES}>
+    $<INSTALL_INTERFACE:include>
+)
+target_include_directories(
+    ${PROJECT_NAME_STR}static
     INTERFACE
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
     $<INSTALL_INTERFACE:include>
